@@ -180,6 +180,21 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         return role;
     }
 
+
+    public void reloadConfigurations() throws RemoteException {
+
+        loadUserCredentials(); 
+
+        initializeUserRoles();
+
+        loadAccessControlPolicy();
+
+        loadRoleHierarchy();
+    
+        LOGGER.info("Configuration reloaded successfully.");
+    }
+    
+
     @Override
     public void print(String filename, String printer, String token) throws RemoteException {
         if (!isUserAllowed("print", token)) {
