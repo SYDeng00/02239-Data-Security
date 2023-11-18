@@ -1,0 +1,13 @@
+Nov 18, 2023 6:11:45 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {}
+Nov 18, 2023 6:11:45 PM com.security.PrintServerImpl initializeUserRoles
+SEVERE: Error loading user roles: userRoles.properties (No such file or directory)
+java.io.FileNotFoundException: userRoles.properties (No such file or directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.security.PrintServerImpl.initializeUserRoles(PrintServerImpl.java:89)
+	at com.security.PrintServerImpl.<init>(PrintServerImpl.java:43)
+	at com.security.ApplicationServer.main(ApplicationServer.java:11)
+
