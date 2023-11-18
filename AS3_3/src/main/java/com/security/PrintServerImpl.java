@@ -84,16 +84,20 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         }
     
 
-    private void initializeUserRoles() {
-        // Here you can load the roles from an external file or define them statically
-        // For example:
-        userRoles.put("test", "admin");
-        userRoles.put("user1", "user");
-        userRoles.put("technician", "technician");
-        // Add other users and their roles
-        LOGGER.info("User roles initialized: " + userRoles);
+        private void initializeUserRoles() {
+            Properties roleProps = new Properties();
+            try (FileInputStream input = new FileInputStream("userRoles.properties")) {
+                roleProps.load(input);
+                for (String username : roleProps.stringPropertyNames()) {
+                    String role = roleProps.getProperty(username);
+                    userRoles.put(username, role);
+                }
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Error loading user roles: " + e.getMessage(), e);
+            }
+        }
         
-    }        
+        
 
 
     @Override

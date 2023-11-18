@@ -11,8 +11,10 @@ public class UserInfoGenerator {
     public static void main(String[] args) {
         Properties userCredentials = new Properties();
         
-        addUser(userCredentials, "user1", "password1");
         addUser(userCredentials, "test", "test");
+        addUser(userCredentials, "george", "george");
+        addUser(userCredentials, "henry", "henry");
+        addUser(userCredentials, "ida", "ida");
 
 
         try (FileOutputStream output = new FileOutputStream(CREDENTIALS_FILE)) {

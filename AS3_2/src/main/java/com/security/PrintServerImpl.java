@@ -18,9 +18,10 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
     private Map<String, String> userHashedPasswords = new HashMap<>();
     private Map<String, String> authenticatedUsers = new HashMap<>();
     private static final String CREDENTIALS_FILE = "userCredentials.properties";
-
     private Map<String, String> tokenToUserRoleMap = new HashMap<>();
-    
+    private Map<String, Set<String>> roleHierarchy = new HashMap<>();
+    private Map<String, Set<String>> rolesAndPermissions = new HashMap<>();
+
     // Declare and initialize the userRoles map
     private Map<String, String> userRoles = new HashMap<>();
 
@@ -40,6 +41,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         super();
         loadUserCredentials();
         loadAccessControlPolicy();  // Load the access control policy
+        loadRoleHierarchy();
         initializeUserRoles();
     }
     
@@ -61,6 +63,23 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
     }
     
 
+    // private void addInheritedPermissionsToPolicy(String role, Set<String> allowedMethods) {
+    //     if (roleHierarchy.containsKey(role)) {
+    //         for (String inheritedRole : roleHierarchy.get(role)) {
+    //             allowedMethods.addAll(accessControlPolicy.getOrDefault(inheritedRole, Collections.emptySet()));
+    //         }
+    //     }
+    // }
+    private void addInheritedPermissions(String role, Set<String> effectivePermissions) {
+        if (roleHierarchy.containsKey(role)) {
+            for (String inheritedRole : roleHierarchy.get(role)) {
+                effectivePermissions.addAll(accessControlPolicy.getOrDefault(inheritedRole, Collections.emptySet()));
+                addInheritedPermissions(inheritedRole, effectivePermissions); // 递归地添加更深层次继承的权限
+            }
+        }
+    }
+    
+    
     
     private void loadUserCredentials() {
             Properties userCredentials = new Properties();
@@ -84,16 +103,31 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         }
     
 
-    private void initializeUserRoles() {
-        // Here you can load the roles from an external file or define them statically
-        // For example:
-        userRoles.put("test", "admin");
-        userRoles.put("user1", "user");
-        userRoles.put("technician", "technician");
-        // Add other users and their roles
-        LOGGER.info("User roles initialized: " + userRoles);
+        private void initializeUserRoles() {
+            Properties roleProps = new Properties();
+            try (FileInputStream input = new FileInputStream("userRoles.properties")) {
+                roleProps.load(input);
+                for (String username : roleProps.stringPropertyNames()) {
+                    String role = roleProps.getProperty(username);
+                    userRoles.put(username, role);
+                }
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Error loading user roles: " + e.getMessage(), e);
+            }
+        }
         
-    }        
+        private void loadRoleHierarchy() {
+            Properties hierarchyProps = new Properties();
+            try (FileInputStream input = new FileInputStream("roleHierarchy.properties")) {
+                hierarchyProps.load(input);
+                for (String role : hierarchyProps.stringPropertyNames()) {
+                    Set<String> inheritedRoles = new HashSet<>(Arrays.asList(hierarchyProps.getProperty(role).split(",")));
+                    roleHierarchy.put(role, inheritedRoles);
+                }
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Error loading role hierarchy: " + e.getMessage(), e);
+            }
+        }        
 
 
     @Override
@@ -118,6 +152,33 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
     }
     
     
+   private boolean isUserAllowed(String methodName, String token) {
+        String userRole = getUserRole(token);
+        Set<String> effectivePermissions = new HashSet<>();
+    
+        // 添加直接权限
+        effectivePermissions.addAll(rolesAndPermissions.getOrDefault(userRole, Collections.emptySet()));
+    
+        // 添加继承的权限
+        addInheritedPermissions(userRole, effectivePermissions);
+    
+        LOGGER.info("Checking access for method: " + methodName + ", Token: " + token + ", UserRole: " + userRole + ", Effective Permissions: " + effectivePermissions);
+        return effectivePermissions.contains(methodName);
+    }
+
+
+    
+     
+
+    private String getUserRole(String token) {
+        String role = tokenToUserRoleMap.get(token);
+        if (role == null) {
+            LOGGER.warning("Role not found for token: " + token);
+        } else {
+            LOGGER.info("Retrieved role for token " + token + ": " + role);
+        }
+        return role;
+    }
 
     @Override
     public void print(String filename, String printer, String token) throws RemoteException {
@@ -133,30 +194,6 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
             System.err.println("Error in print method: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-    private boolean isUserAllowed(String methodName, String token) {
-        String userRole = getUserRole(token);
-        Set<String> allowedMethods = accessControlPolicy.get(userRole);
-    
-        LOGGER.info("Checking access for method: " + methodName + ", Token: " + token + ", UserRole: " + userRole);
-        if (allowedMethods != null) {
-            LOGGER.info("Allowed methods for role: " + allowedMethods);
-            return allowedMethods.contains(methodName);
-        } else {
-            LOGGER.info("No allowed methods found for role: " + userRole);
-            return false;
-        }
-    }
-    
-
-    private String getUserRole(String token) {
-        String role = tokenToUserRoleMap.get(token);
-        if (role == null) {
-            LOGGER.warning("Role not found for token: " + token);
-        } else {
-            LOGGER.info("Retrieved role for token " + token + ": " + role);
-        }
-        return role;
     }
     
 
