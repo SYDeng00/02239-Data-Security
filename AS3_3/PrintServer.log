@@ -340,3 +340,85 @@ Nov 20, 2023 2:14:38 PM com.security.PrintServerImpl getUserRole
 INFO: Retrieved role for token a5ed945d-91dc-4cf1-9458-329f668888a4: user
 Nov 20, 2023 2:14:38 PM com.security.PrintServerImpl isUserAllowed
 INFO: Checking access for method: print, Token: a5ed945d-91dc-4cf1-9458-329f668888a4, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:26:26 下午 com.security.PrintServerImpl loadUserCredentials
+信息: User credentials have been loaded from userCredentials.properties
+11月 20, 2023 2:26:26 下午 com.security.PrintServerImpl loadAccessControlPolicy
+信息: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+11月 20, 2023 2:26:37 下午 com.security.PrintServerImpl login
+信息: User henry logged in. Role: user, Token: d3a2ccac-ac5c-4405-85aa-04624e43f8b2
+11月 20, 2023 2:26:37 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token d3a2ccac-ac5c-4405-85aa-04624e43f8b2: user
+11月 20, 2023 2:26:37 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: d3a2ccac-ac5c-4405-85aa-04624e43f8b2, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:27:26 下午 com.security.PrintServerImpl login
+信息: User henry logged in. Role: user, Token: 44644bef-3f2a-4233-8849-ab7b32f27231
+11月 20, 2023 2:27:26 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token 44644bef-3f2a-4233-8849-ab7b32f27231: user
+11月 20, 2023 2:27:27 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: 44644bef-3f2a-4233-8849-ab7b32f27231, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:33:44 下午 com.security.PrintServerImpl login
+信息: User henry logged in. Role: user, Token: b65ccc9b-d8e7-4769-a580-86d4684e058b
+11月 20, 2023 2:33:44 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token b65ccc9b-d8e7-4769-a580-86d4684e058b: user
+11月 20, 2023 2:33:44 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: b65ccc9b-d8e7-4769-a580-86d4684e058b, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:33:51 下午 com.security.PrintServerImpl login
+信息: User henry logged in. Role: user, Token: aa80ac3f-1814-467c-876e-040493338c07
+11月 20, 2023 2:33:51 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token aa80ac3f-1814-467c-876e-040493338c07: user
+11月 20, 2023 2:33:51 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: aa80ac3f-1814-467c-876e-040493338c07, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:34:09 下午 com.security.PrintServerImpl loadUserCredentials
+信息: User credentials have been loaded from userCredentials.properties
+11月 20, 2023 2:34:09 下午 com.security.PrintServerImpl loadAccessControlPolicy
+信息: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+11月 20, 2023 2:34:12 下午 com.security.PrintServerImpl loadUserCredentials
+信息: User credentials have been loaded from userCredentials.properties
+11月 20, 2023 2:34:12 下午 com.security.PrintServerImpl loadAccessControlPolicy
+信息: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+11月 20, 2023 2:34:12 下午 com.security.PrintServerImpl reloadConfigurations
+信息: Configuration reloaded successfully.
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl login
+信息: User henry logged in. Role: user, Token: 78ebd796-a68e-4bc6-a129-9a94d1793f62
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token 78ebd796-a68e-4bc6-a129-9a94d1793f62: user
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: 78ebd796-a68e-4bc6-a129-9a94d1793f62, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token 78ebd796-a68e-4bc6-a129-9a94d1793f62: user
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: status, Token: 78ebd796-a68e-4bc6-a129-9a94d1793f62, UserRole: user, Effective Permissions: [print, queue]
+11月 20, 2023 2:34:16 下午 com.security.PrintServerImpl status
+严重: Unauthorized access attempt to start by token: 78ebd796-a68e-4bc6-a129-9a94d1793f62
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl login
+信息: User george logged in. Role: admin, Token: db12e410-c557-467b-bd37-c4b65fb91f49
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token db12e410-c557-467b-bd37-c4b65fb91f49: admin
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: db12e410-c557-467b-bd37-c4b65fb91f49, UserRole: admin, Effective Permissions: [readConfig, print, stop, restart, start, topQueue, queue, setConfig]
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token db12e410-c557-467b-bd37-c4b65fb91f49: admin
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: status, Token: db12e410-c557-467b-bd37-c4b65fb91f49, UserRole: admin, Effective Permissions: [readConfig, print, stop, restart, start, topQueue, queue, setConfig]
+11月 20, 2023 2:35:12 下午 com.security.PrintServerImpl status
+严重: Unauthorized access attempt to start by token: db12e410-c557-467b-bd37-c4b65fb91f49
+11月 20, 2023 2:37:12 下午 com.security.PrintServerImpl loadUserCredentials
+信息: User credentials have been loaded from userCredentials.properties
+11月 20, 2023 2:37:12 下午 com.security.PrintServerImpl loadAccessControlPolicy
+信息: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig, status], power=[restart, topQueue], user=[print, queue]}
+11月 20, 2023 2:37:18 下午 com.security.PrintServerImpl loadUserCredentials
+信息: User credentials have been loaded from userCredentials.properties
+11月 20, 2023 2:37:18 下午 com.security.PrintServerImpl loadAccessControlPolicy
+信息: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig, status], power=[restart, topQueue], user=[print, queue]}
+11月 20, 2023 2:37:18 下午 com.security.PrintServerImpl reloadConfigurations
+信息: Configuration reloaded successfully.
+11月 20, 2023 2:37:23 下午 com.security.PrintServerImpl login
+信息: User george logged in. Role: admin, Token: 7f652ce7-f501-48a1-8e25-762fa02d5770
+11月 20, 2023 2:37:23 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token 7f652ce7-f501-48a1-8e25-762fa02d5770: admin
+11月 20, 2023 2:37:23 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: print, Token: 7f652ce7-f501-48a1-8e25-762fa02d5770, UserRole: admin, Effective Permissions: [readConfig, print, stop, restart, start, topQueue, queue, setConfig, status]
+11月 20, 2023 2:37:23 下午 com.security.PrintServerImpl getUserRole
+信息: Retrieved role for token 7f652ce7-f501-48a1-8e25-762fa02d5770: admin
+11月 20, 2023 2:37:23 下午 com.security.PrintServerImpl isUserAllowed
+信息: Checking access for method: status, Token: 7f652ce7-f501-48a1-8e25-762fa02d5770, UserRole: admin, Effective Permissions: [readConfig, print, stop, restart, start, topQueue, queue, setConfig, status]
