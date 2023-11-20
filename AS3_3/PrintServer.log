@@ -272,3 +272,71 @@ Nov 18, 2023 7:59:44 PM com.security.PrintServerImpl getUserRole
 INFO: Retrieved role for token b59913c8-26e9-494f-afb5-1eabb8f69a06: admin
 Nov 18, 2023 7:59:44 PM com.security.PrintServerImpl isUserAllowed
 INFO: Checking access for method: print, Token: b59913c8-26e9-494f-afb5-1eabb8f69a06, UserRole: admin, Effective Permissions: [readConfig, print, stop, restart, start, topQueue, queue, setConfig]
+Nov 20, 2023 1:34:38 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 1:34:38 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 1:34:53 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: 60816a91-4129-462b-9518-b08f278a606c
+Nov 20, 2023 1:34:53 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token 60816a91-4129-462b-9518-b08f278a606c: user
+Nov 20, 2023 1:34:53 PM com.security.PrintServerImpl isUserAllowed
+INFO: Checking access for method: print, Token: 60816a91-4129-462b-9518-b08f278a606c, UserRole: user, Effective Permissions: []
+Nov 20, 2023 1:34:53 PM com.security.PrintServerImpl print
+SEVERE: Unauthorized access attempt to print by token: 60816a91-4129-462b-9518-b08f278a606c
+Nov 20, 2023 1:35:56 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 1:35:56 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 1:36:01 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: 01fad894-715d-4cae-bb79-322b6531a202
+Nov 20, 2023 1:36:01 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token 01fad894-715d-4cae-bb79-322b6531a202: user
+Nov 20, 2023 1:36:16 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: 84f3ca6a-6dcc-4383-89f3-2dc900c9e2cf
+Nov 20, 2023 1:36:16 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token 84f3ca6a-6dcc-4383-89f3-2dc900c9e2cf: user
+Nov 20, 2023 1:41:03 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 1:41:03 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 1:41:08 PM com.security.PrintServerImpl login
+INFO: User ida logged in. Role: powerUser, Token: e45ff61a-b9bc-430e-9379-b2fd82449b72
+Nov 20, 2023 1:41:08 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token e45ff61a-b9bc-430e-9379-b2fd82449b72: powerUser
+Nov 20, 2023 1:41:08 PM com.security.PrintServerImpl isUserAllowed
+INFO: Checking access for method: print, Token: e45ff61a-b9bc-430e-9379-b2fd82449b72, UserRole: powerUser, Effective Permissions: [print, restart, topQueue, queue]
+Nov 20, 2023 2:04:36 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 2:04:36 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 2:04:48 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: 302ecfe4-de4a-46c4-ba11-5edce5ce6115
+Nov 20, 2023 2:04:48 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token 302ecfe4-de4a-46c4-ba11-5edce5ce6115: user
+Nov 20, 2023 2:04:48 PM com.security.PrintServerImpl isUserAllowed
+INFO: Checking access for method: print, Token: 302ecfe4-de4a-46c4-ba11-5edce5ce6115, UserRole: user, Effective Permissions: []
+Nov 20, 2023 2:04:48 PM com.security.PrintServerImpl print
+SEVERE: Unauthorized access attempt to print by token: 302ecfe4-de4a-46c4-ba11-5edce5ce6115
+Nov 20, 2023 2:11:24 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 2:11:24 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 2:11:31 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: 189c5ad1-0684-4259-b3c6-5c72ac9374f2
+Nov 20, 2023 2:11:31 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token 189c5ad1-0684-4259-b3c6-5c72ac9374f2: user
+Nov 20, 2023 2:11:31 PM com.security.PrintServerImpl isUserAllowed
+INFO: Checking access for method: print, Token: 189c5ad1-0684-4259-b3c6-5c72ac9374f2, UserRole: user, Effective Permissions: []
+Nov 20, 2023 2:11:31 PM com.security.PrintServerImpl print
+SEVERE: Unauthorized access attempt to print by token: 189c5ad1-0684-4259-b3c6-5c72ac9374f2
+Nov 20, 2023 2:14:33 PM com.security.PrintServerImpl loadUserCredentials
+INFO: User credentials have been loaded from userCredentials.properties
+Nov 20, 2023 2:14:33 PM com.security.PrintServerImpl loadAccessControlPolicy
+INFO: Access control policy loaded: {technician=[readConfig, stop, restart, start, setConfig], power=[restart, topQueue], user=[print, queue]}
+Nov 20, 2023 2:14:38 PM com.security.PrintServerImpl login
+INFO: User henry logged in. Role: user, Token: a5ed945d-91dc-4cf1-9458-329f668888a4
+Nov 20, 2023 2:14:38 PM com.security.PrintServerImpl getUserRole
+INFO: Retrieved role for token a5ed945d-91dc-4cf1-9458-329f668888a4: user
+Nov 20, 2023 2:14:38 PM com.security.PrintServerImpl isUserAllowed
+INFO: Checking access for method: print, Token: a5ed945d-91dc-4cf1-9458-329f668888a4, UserRole: user, Effective Permissions: [print, queue]

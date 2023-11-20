@@ -20,7 +20,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
     private static final String CREDENTIALS_FILE = "userCredentials.properties";
     private Map<String, String> tokenToUserRoleMap = new HashMap<>();
     private Map<String, Set<String>> roleHierarchy = new HashMap<>();
-    private Map<String, Set<String>> rolesAndPermissions = new HashMap<>();
+    // private Map<String, Set<String>> rolesAndPermissions = new HashMap<>();
 
     // Declare and initialize the userRoles map
     private Map<String, String> userRoles = new HashMap<>();
@@ -57,7 +57,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
                 accessControlPolicy.put(role, allowedMethods);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error loading roles and permissions.", e);
         }
         LOGGER.info("Access control policy loaded: " + accessControlPolicy);
     }
@@ -157,7 +157,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         Set<String> effectivePermissions = new HashSet<>();
     
         // 添加直接权限
-        effectivePermissions.addAll(rolesAndPermissions.getOrDefault(userRole, Collections.emptySet()));
+        effectivePermissions.addAll(accessControlPolicy.getOrDefault(userRole, Collections.emptySet()));
     
         // 添加继承的权限
         addInheritedPermissions(userRole, effectivePermissions);

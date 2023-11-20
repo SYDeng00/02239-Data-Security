@@ -6,7 +6,7 @@ public class PrintClient {
     public static void main(String[] args) {
         try {
             PrintServer server = (PrintServer) Naming.lookup("rmi://localhost:1099/PrintServer");
-            String token = server.login("george", "george");
+            String token = server.login("henry", "henry");
             if (token != null) {
                 // Use the token returned from the server for subsequent operations
                 server.print("document.txt", "printer1", token);
