@@ -194,16 +194,28 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public void start(String token) throws RemoteException {
+        if (!isUserAllowed("start", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server started.");
     }
 
     @Override
     public void stop(String token) throws RemoteException {
+        if (!isUserAllowed("stop", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server stopped.");
     }
 
     @Override
     public void restart(String token) throws RemoteException {
+        if (!isUserAllowed("restart", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server restarting...");
         stop(token);
         start(token);
@@ -211,19 +223,33 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public String status(String printer, String token) throws RemoteException {
+        if (!isUserAllowed("status", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Requested to check the status of printer: " + printer);
         return token;
     }
 
     @Override
     public String readConfig(String parameter, String token) throws RemoteException {
+        if (!isUserAllowed("readConfig", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Requested to read configuration parameter: " + parameter);
         return "Value";
     }
 
     @Override
     public void setConfig(String parameter, String value, String token) throws RemoteException {
+        if (!isUserAllowed("start", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Setting configuration parameter: " + parameter + " to value: " + value);
     }
+
+   
 }
 

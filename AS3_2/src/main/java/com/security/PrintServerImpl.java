@@ -1,13 +1,24 @@
 package com.security;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.rmi.*;
-import java.rmi.server.*;
-import java.util.*;
-import java.util.logging.Logger;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Queue;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class PrintServerImpl extends UnicastRemoteObject implements PrintServer {
@@ -20,7 +31,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
     private static final String CREDENTIALS_FILE = "userCredentials.properties";
     private Map<String, String> tokenToUserRoleMap = new HashMap<>();
     private Map<String, Set<String>> roleHierarchy = new HashMap<>();
-    private Map<String, Set<String>> rolesAndPermissions = new HashMap<>();
+    // private Map<String, Set<String>> rolesAndPermissions = new HashMap<>();
 
     // Declare and initialize the userRoles map
     private Map<String, String> userRoles = new HashMap<>();
@@ -57,19 +68,11 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
                 accessControlPolicy.put(role, allowedMethods);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error loading roles and permissions.", e);
         }
         LOGGER.info("Access control policy loaded: " + accessControlPolicy);
     }
     
-
-    // private void addInheritedPermissionsToPolicy(String role, Set<String> allowedMethods) {
-    //     if (roleHierarchy.containsKey(role)) {
-    //         for (String inheritedRole : roleHierarchy.get(role)) {
-    //             allowedMethods.addAll(accessControlPolicy.getOrDefault(inheritedRole, Collections.emptySet()));
-    //         }
-    //     }
-    // }
     private void addInheritedPermissions(String role, Set<String> effectivePermissions) {
         if (roleHierarchy.containsKey(role)) {
             for (String inheritedRole : roleHierarchy.get(role)) {
@@ -78,8 +81,6 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
             }
         }
     }
-    
-    
     
     private void loadUserCredentials() {
             Properties userCredentials = new Properties();
@@ -157,7 +158,7 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         Set<String> effectivePermissions = new HashSet<>();
     
         // 添加直接权限
-        effectivePermissions.addAll(rolesAndPermissions.getOrDefault(userRole, Collections.emptySet()));
+        effectivePermissions.addAll(accessControlPolicy.getOrDefault(userRole, Collections.emptySet()));
     
         // 添加继承的权限
         addInheritedPermissions(userRole, effectivePermissions);
@@ -179,6 +180,9 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
         }
         return role;
     }
+
+
+    
 
     @Override
     public void print(String filename, String printer, String token) throws RemoteException {
@@ -227,16 +231,28 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public void start(String token) throws RemoteException {
+        if (!isUserAllowed("start", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server started.");
     }
 
     @Override
     public void stop(String token) throws RemoteException {
+        if (!isUserAllowed("stop", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server stopped.");
     }
 
     @Override
     public void restart(String token) throws RemoteException {
+        if (!isUserAllowed("restart", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Print server restarting...");
         stop(token);
         start(token);
@@ -244,18 +260,30 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public String status(String printer, String token) throws RemoteException {
+        if (!isUserAllowed("status", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Requested to check the status of printer: " + printer);
         return token;
     }
 
     @Override
     public String readConfig(String parameter, String token) throws RemoteException {
+        if (!isUserAllowed("readConfig", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Requested to read configuration parameter: " + parameter);
         return "Value";
     }
 
     @Override
     public void setConfig(String parameter, String value, String token) throws RemoteException {
+        if (!isUserAllowed("start", token)) {
+            LOGGER.severe("Unauthorized access attempt to start by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Setting configuration parameter: " + parameter + " to value: " + value);
     }
 }
