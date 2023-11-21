@@ -11,7 +11,7 @@ public class PrintClient {
                 // Use the token returned from the server for subsequent operations
                 server.print("document.txt", "printer1", token);
                 System.out.println(server.queue("printer1", token));
-
+                
                 System.out.println(server.queue("printer1", token));
                 String status = server.status("printer1", token);
                 System.out.println("Printer status: " + status);

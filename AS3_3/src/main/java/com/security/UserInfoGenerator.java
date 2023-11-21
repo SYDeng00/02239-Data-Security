@@ -15,6 +15,7 @@ public class UserInfoGenerator {
         addUser(userCredentials, "george", "george");
         addUser(userCredentials, "henry", "henry");
         addUser(userCredentials, "ida", "ida");
+        addUser(userCredentials, "test3", "test3");
 
 
         try (FileOutputStream output = new FileOutputStream(CREDENTIALS_FILE)) {
