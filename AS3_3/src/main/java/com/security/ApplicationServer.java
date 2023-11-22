@@ -23,6 +23,7 @@
 
 package com.security;
 
+import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -30,6 +31,21 @@ import java.util.Scanner;
 
 public class ApplicationServer {
     public static void main(String[] args) {
+
+        // start the file and change monitor thread
+        // also start the thread of file change monitoring
+        Thread fileMonitorThread = new Thread(() -> {
+            try {
+                FileChangeMonitor.startMonitoring();
+            } catch (IOException | InterruptedException e) {
+                System.err.println("Error in FileChangeMonitor: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+        fileMonitorThread.start();
+
+
+
         Scanner scanner = null;
         try {
             LocateRegistry.createRegistry(1099);
@@ -61,3 +77,4 @@ public class ApplicationServer {
         }
     }
 }
+

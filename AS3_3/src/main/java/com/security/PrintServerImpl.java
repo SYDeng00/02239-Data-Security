@@ -225,6 +225,11 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public String queue(String printer, String token) throws RemoteException {
+
+        if (!isUserAllowed("queue", token)) {
+            LOGGER.severe("Unauthorized access attempt to queue by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
         System.out.println("Requested to list the print queue for printer: " + printer);
         Queue<String> queue = printQueues.get(printer);
         if (queue == null || queue.isEmpty()) {
@@ -240,6 +245,12 @@ public class PrintServerImpl extends UnicastRemoteObject implements PrintServer 
 
     @Override
     public void topQueue(String printer, int job, String token) throws RemoteException {
+
+        if (!isUserAllowed("topQueue", token)) {
+            LOGGER.severe("Unauthorized access attempt to topQueue by token: " + token);
+            throw new SecurityException("Unauthorized access");
+        }
+    
         System.out.println("Requested to move job " + job + " to the top of the queue for printer: " + printer);
         Queue<String> queue = printQueues.get(printer);
         if (queue != null && job > 0 && job <= queue.size()) {

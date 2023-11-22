@@ -1,6 +1,6 @@
 package com.security;
 
-import java.rmi.*;
+import java.rmi.Naming;
 
 public class PrintClient {
     public static void main(String[] args) {
@@ -12,9 +12,12 @@ public class PrintClient {
                 server.print("document.txt", "printer1", token);
                 System.out.println(server.queue("printer1", token));
                 
-                System.out.println(server.queue("printer1", token));
-                String status = server.status("printer1", token);
-                System.out.println("Printer status: " + status);
+
+                //verify operations below
+
+                //server.topQueue(token, 0, token);   
+                // String status = server.status("printer1", token);
+                // System.out.println("Printer status: " + status);
 
             } else {
                 System.out.println("Login failed");
