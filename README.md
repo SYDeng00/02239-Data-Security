@@ -1,4 +1,3 @@
-# 02239-Data-Security
+# Project Overview
 
-Remember to open different folder to get defferent workspace. For example, if you want to test AS_1 you need to open AS_1 folder not the root folder. I didn't use 
-globle path of the file inside is to make other user run it easily.
+This repository contains the code and documentation for a series of tasks aimed at enhancing a prototype print server developed in our Authentication lab. The main focus is to implement and enforce an access control policy via an access control list (ACL) and subsequently through Role-Based Access Control (RBAC).
